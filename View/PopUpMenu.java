@@ -15,8 +15,11 @@ public class PopUpMenu {
 
     public PopUpMenu() {
 
+        //Initialize Config
+        Config config = new Config();
+
         //Initialize popup menus
-        popup_file = new JPopupMenu();
+        popup_file = new JPopupMenu("File");
         popup_brush = new JPopupMenu();
         popup_eraser = new JPopupMenu();
         popup_size = new JPopupMenu();
@@ -24,13 +27,31 @@ public class PopUpMenu {
         popup_symmetry = new JPopupMenu();
 
         //Setup for File
+        JButton btn_fsave, btn_fload, btn_fexport;
+        btn_fsave = new JButton("Save");
+        btn_fload = new JButton("Load");
+        btn_fexport = new JButton("Export");
+        JLabel label_file = new JLabel("File");
+        popup_file.add(label_file);
+        popup_file.add(btn_fsave);
+        popup_file.add(btn_fload);
+        popup_file.add(btn_fexport);
 
         //Setup for brush
-
-        //Setup for eraser
+        JButton btn_brush1, btn_brush2, btn_brush3, btn_brush4;
+        btn_brush1 = new JButton("Brush 1");
+        btn_brush2 = new JButton("Brush 2");
+        btn_brush3 = new JButton("Brush 3");
+        btn_brush4 = new JButton("Brush 4");
+        JLabel label_brush = new JLabel("Select a brush");
+        popup_brush.add(label_brush);
+        popup_brush.add(btn_brush1);
+        popup_brush.add(btn_brush2);
+        popup_brush.add(btn_brush3);
+        popup_brush.add(btn_brush4);
 
         //Setup for size
-        JSlider slider_size = new JSlider(JSlider.HORIZONTAL, 1, 20, 5);
+        JSlider slider_size = new JSlider(JSlider.HORIZONTAL, 1, 50, 5);
         JLabel label_size = new JLabel("Size : 5");
         JButton btn_size = new JButton("Done");
         popup_size.add(slider_size);
@@ -52,19 +73,27 @@ public class PopUpMenu {
         int height = 200;
         popup_size.setPopupSize(width, height);
         popup_clear.setPopupSize(width, height);
+        popup_brush.setPopupSize(width, height);
 
         //Initialize popup location
-        Config config = new Config();
         int x = config.getPosition().x + 450;
         int y = config.getPosition().y + 300;
         //Set location for popups
         popup_size.setLocation(x, y);
         popup_clear.setLocation(x, y);
+        popup_brush.setLocation(x, y);
 
         //Add action listeners for buttons
         btn_clearYes.addActionListener(new PopupButtonListener(this));
         btn_clearNo.addActionListener(new PopupButtonListener(this));
         btn_size.addActionListener(new PopupButtonListener(this));
+        btn_brush1.addActionListener(new PopupButtonListener(this));
+        btn_brush2.addActionListener(new PopupButtonListener(this));
+        btn_brush3.addActionListener(new PopupButtonListener(this));
+        btn_brush4.addActionListener(new PopupButtonListener(this));
+        btn_fsave.addActionListener(new PopupButtonListener(this));
+        btn_fload.addActionListener(new PopupButtonListener(this));
+        btn_fexport.addActionListener(new PopupButtonListener(this));
 
         //Add action listeners for sliders and colors
         slider_size.addChangeListener(new PopupSliderListener(slider_size, label_size));
@@ -72,13 +101,15 @@ public class PopUpMenu {
 
     //Popup appear functions
 
-    public void popup_size_show(boolean b) {
-        popup_size.setVisible(b);
-    }
+    public void popup_file_show(boolean b) { popup_file.setVisible(b); }
+
+    public void popup_size_show(boolean b) { popup_size.setVisible(b); }
 
     public void popup_clear_show(boolean b) {
         popup_clear.setVisible(b);
     }
+
+    public void popup_brush_show(boolean b) { popup_brush.setVisible(b); }
 
 
 }

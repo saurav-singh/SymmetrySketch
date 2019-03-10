@@ -11,18 +11,21 @@ public class Art {
     public static void main(String[] args) {
 
         //Initialize JFrame
-        JFrame frame = new JFrame("Symmetrik");
+        JFrame frame = new JFrame("Symmetry Sketch");
         frame.setSize(1200, 900);
-        frame.setResizable(false);
+        frame.setResizable(true);
+        frame.setMinimumSize(new Dimension(700,500));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //Set frame in center
         frame.setLocationRelativeTo(null);
 
         //Initialize Model class
-        Config config = new Config(frame);
+        Config config = new Config(frame)
+                ;
         //Initialize ArtCanvas
         ArtCanvas canvas = new ArtCanvas(config);
+
         //Setup Canvas for Painter
         new Painter(canvas);
 

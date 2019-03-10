@@ -21,13 +21,15 @@ public class ArtListener implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
 
-        this.config.addStrokePoint(e.getPoint(), this.config.getColor(), this.config.getSize());
+        this.config.addStrokePoint(e.getPoint(), this.config.getColor(), this.config.getSize(), this.config.getBrushType());
         this.painter.re_paint();
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
 
+        this.config.setCursor(e.getPoint());
+        this.painter.re_paint();
     }
 }
 
