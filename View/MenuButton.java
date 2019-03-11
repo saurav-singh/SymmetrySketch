@@ -1,7 +1,6 @@
 package View;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class MenuButton extends JButton {
@@ -15,7 +14,7 @@ public class MenuButton extends JButton {
         this.setHorizontalTextPosition(CENTER);
 
         //Set button icon
-        Image image = new ImageIcon(this.getClass().getResource("../Assets/"+icon)).getImage();
+        Image image = new ImageIcon(this.getClass().getResource("/Assets/"+icon)).getImage();
         image = image.getScaledInstance(40,40,Image.SCALE_SMOOTH);
         this.setIcon(new ImageIcon(image));
 
@@ -25,9 +24,6 @@ public class MenuButton extends JButton {
 
         //Border settings
         this.setBorderPainted(false);
-
-        //Set preferred button dimension
-        //this.setPreferredSize(new Dimension(40, 100));
 
     }
 

@@ -39,8 +39,8 @@ public class TopMenu extends JPanel {
         this.add(color);
         this.add(size);
         this.add(clear);
-        this.add(symmetry);
         this.add(background);
+        this.add(symmetry);
 
         //Add mouse listener
         file.addMouseListener(new MenuButtonListener(file));

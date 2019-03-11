@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Config;
 import Model.Painter;
+import Model.Symmetry;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -10,11 +11,13 @@ public class ArtListener implements MouseMotionListener {
 
     private Painter painter;
     private Config config;
+    private Symmetry symmetry;
 
     public ArtListener() {
 
         this.painter = new Painter();
         this.config = new Config();
+        this.symmetry = new Symmetry();
 
     }
 
@@ -22,6 +25,15 @@ public class ArtListener implements MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
 
         this.config.addStrokePoint(e.getPoint(), this.config.getColor(), this.config.getSize(), this.config.getBrushType());
+
+        if(this.config.getSymHorizontal()){
+            this.symmetry.addHrSymmetry(e.getPoint());
+        }
+
+        if(this.config.getSymVertical()) {
+            this.symmetry.addVrSymmetry(e.getPoint());
+        }
+
         this.painter.re_paint();
     }
 

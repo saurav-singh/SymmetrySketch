@@ -2,12 +2,15 @@ package View;
 
 import Controller.ArtListener;
 import Model.Config;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class ArtCanvas extends JPanel {
 
+    //Symmetries
+    private boolean hr, vr, cr;
     //Sketch points
     private ArrayList<Point> sketchPoint;
     //Size history
@@ -17,15 +20,14 @@ public class ArtCanvas extends JPanel {
     //Brush Type
     private ArrayList<Integer> brushType;
 
-
-
+    //Art Class Constructor
     public ArtCanvas(Config config) {
 
         //Load data from config
         loadData(config);
 
         //Set Background color
-        this.setBackground(Color.WHITE);
+        this.setBackground(config.getBgColor());
 
         //Add mouse listener for drawing
         this.addMouseMotionListener(new ArtListener());
@@ -47,6 +49,10 @@ public class ArtCanvas extends JPanel {
         this.sizePoint = config.getSizePoints();
         this.colorPoint = config.getColorPoints();
         this.brushType = config.getBrushPattern();
+        this.setBackground(config.getBgColor());
+        this.hr = config.getSymHorizontal();
+        this.vr = config.getSymVertical();
+        this.cr = config.getSymCross();
     }
 
     //Overwriting paint class (actual canvas)
@@ -59,8 +65,8 @@ public class ArtCanvas extends JPanel {
         Graphics2D G2 = (Graphics2D) g;
 
         //Set Anti-alias
-        G2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        G2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        G2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        G2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         //Sketch on canvas if there are any points on 'sketchPoint'
         if (this.sketchPoint.size() > 0) {
@@ -75,16 +81,16 @@ public class ArtCanvas extends JPanel {
                 G2.setColor(this.colorPoint.get(i));
 
                 //Stroke according to brush type
-                switch (this.brushType.get(i)){
+                switch (this.brushType.get(i)) {
                     case 1:
                         G2.fillOval(x, y, this.sizePoint.get(i), this.sizePoint.get(i));
                         break;
                     case 2:
-                        G2.fillRect(x, y, this.sizePoint.get(i), this.sizePoint.get(i));
+                        G2.drawRect(x, y, this.sizePoint.get(i), this.sizePoint.get(i));
                         break;
                     case 3:
                         //G2.fillArc(x, y, this.sizePoint.get(i), this.sizePoint.get(i),0,180);
-                        G2.drawArc(x,y,this.sizePoint.get(i),this.sizePoint.get(i),0,50);
+                        G2.drawArc(x, y, this.sizePoint.get(i), this.sizePoint.get(i), 0, 50);
                         break;
                     case 4:
                         G2.fillOval(x, y, this.sizePoint.get(i), this.sizePoint.get(i));
@@ -92,6 +98,43 @@ public class ArtCanvas extends JPanel {
                 }
 
             }
+        }
+
+        //Symmetric Guide Lines if active
+        G2.setColor(Color.LIGHT_GRAY);
+
+        //Vertical Symmetry guide line
+        if (this.vr) {
+
+            int x1 = this.getWidth() / 2;
+            int y1 = 0;
+            int x2 = x1;
+            int y2 = this.getHeight();
+
+            G2.drawLine(x1, y1, x2, y2);
+        }
+
+        //Horizontal Symmetry guide line
+        if (this.hr) {
+
+            int x1 = 0;
+            int y1 = this.getHeight()/2;
+            int x2 = this.getWidth();
+            int y2 = y1;
+
+            G2.drawLine(x1, y1, x2, y2);
+        }
+
+        //Cross Symmetry guide line
+        if (this.cr) {
+
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = this.getWidth();
+            int y2 = this.getHeight();
+
+            G2.drawLine(x1, y1, x2, y2);
+            G2.drawLine(x1,y2,x2,y1);
         }
 
     }

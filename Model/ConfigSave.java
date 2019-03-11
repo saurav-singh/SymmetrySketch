@@ -11,6 +11,10 @@ public class ConfigSave implements Serializable {
     private int size;
     private int brushType;
     private Color color;
+    private Color bgColor;
+    private boolean sym_horizontal;
+    private boolean sym_vertical;
+    private boolean sym_cross;
     private ArrayList<Point> sketchPoints;
     private ArrayList<Color> colorPoints;
     private ArrayList<Integer> sizePoints;
@@ -22,6 +26,10 @@ public class ConfigSave implements Serializable {
         this.size = C.getSize();
         this.brushType = C.getBrushType();
         this.color = C.getColor();
+        this.bgColor = C.getBgColor();
+        this.sym_horizontal = C.getSymHorizontal();
+        this.sym_vertical = C.getSymVertical();
+        this.sym_cross = C.getSymCross();
         this.sketchPoints = new ArrayList<>(C.getSketchPoints());
         this.colorPoints = new ArrayList<>(C.getColorPoints());
         this.sizePoints = new ArrayList<>(C.getSizePoints());
@@ -30,9 +38,7 @@ public class ConfigSave implements Serializable {
 
     //---------------------------- Getters -----------------------------------------------
 
-    public int getSize() {
-        return this.size;
-    }
+    public int getSize() { return this.size; }
 
     public int getBrushType() {
         return this.brushType;
@@ -41,6 +47,8 @@ public class ConfigSave implements Serializable {
     public Color getColor() {
         return this.color;
     }
+
+    public Color getBgColor() { return this.bgColor; }
 
     public ArrayList<Point> getSketchPoints() {
         return this.sketchPoints;
@@ -58,4 +66,9 @@ public class ConfigSave implements Serializable {
         return this.brushPattern;
     }
 
+    public boolean getSymVertical() { return this.sym_vertical; }
+
+    public boolean getSymHorizontal() { return this.sym_horizontal; }
+
+    public boolean getSymCross() { return this.sym_cross; }
 }

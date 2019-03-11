@@ -25,7 +25,7 @@ public class PopupSliderListener implements ChangeListener {
     public void stateChanged(ChangeEvent e) {
 
         int size = slider.getValue();
-        this.label.setText("Size : " + size);
+        this.label.setText("Current size : " + size);
         this.config.setSize(size);
         this.painter.load_data();
 

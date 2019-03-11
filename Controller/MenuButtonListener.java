@@ -38,12 +38,6 @@ public class MenuButtonListener extends MouseAdapter {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        super.mousePressed(e);
-        this.btn.setBackground(new Color(108, 0, 1));
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
 
@@ -56,25 +50,31 @@ public class MenuButtonListener extends MouseAdapter {
         }
         if (this.btn.getText().equals("Clear")) {
 
-            //Custom Popup (not ready)
-            //pm.popup_clear_show();
-
-            //Default Popup
             int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear the screen?", "Clear Screen?", JOptionPane.YES_NO_OPTION);
             if (choice == 0) {
                 this.config.clearSketch();
                 this.painter.re_paint();
             }
+
         }
         if (this.btn.getText().equals("Color")) {
             Color color = JColorChooser.showDialog(null, "Pick brush color", config.getColor());
             config.setColor(color);
         }
         if (this.btn.getText().equals("Eraser")) {
-            config.setColor(Color.WHITE);
+            config.setColor(config.getBgColor());
         }
         if (this.btn.getText().equals("Brush")) {
             pm.popup_brush_show(true);
+        }
+        if (this.btn.getText().equals("Bkground")) {
+            Color color = JColorChooser.showDialog(null, "Pick brush color", config.getBgColor());
+            config.setBgColor(color);
+            this.painter.load_data();
+            this.painter.re_paint();
+        }
+        if (this.btn.getText().equals("Symmetry")) {
+            pm.popup_symmetry_show(true);
         }
     }
 }
