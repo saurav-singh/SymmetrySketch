@@ -14,7 +14,7 @@ public class ConfigSave implements Serializable {
     private Color bgColor;
     private boolean sym_horizontal;
     private boolean sym_vertical;
-    private boolean sym_cross;
+    private int sym_N;
     private ArrayList<Point> sketchPoints;
     private ArrayList<Color> colorPoints;
     private ArrayList<Integer> sizePoints;
@@ -29,7 +29,7 @@ public class ConfigSave implements Serializable {
         this.bgColor = C.getBgColor();
         this.sym_horizontal = C.getSymHorizontal();
         this.sym_vertical = C.getSymVertical();
-        this.sym_cross = C.getSymCross();
+        this.sym_N = C.getSymCross();
         this.sketchPoints = new ArrayList<>(C.getSketchPoints());
         this.colorPoints = new ArrayList<>(C.getColorPoints());
         this.sizePoints = new ArrayList<>(C.getSizePoints());
@@ -70,5 +70,5 @@ public class ConfigSave implements Serializable {
 
     public boolean getSymHorizontal() { return this.sym_horizontal; }
 
-    public boolean getSymCross() { return this.sym_cross; }
+    public int getSymCross() { return this.sym_N; }
 }

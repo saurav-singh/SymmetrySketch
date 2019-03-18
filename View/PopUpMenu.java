@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class PopUpMenu {
 
-    private JPopupMenu popup_file, popup_brush, popup_size, popup_clear, popup_symmetry;
+    private JPopupMenu popup_file, popup_brush, popup_size, popup_symmetry;
 
     public PopUpMenu() {
 
@@ -20,7 +20,6 @@ public class PopUpMenu {
         popup_file = new JPopupMenu();
         popup_brush = new JPopupMenu();
         popup_size = new JPopupMenu();
-        popup_clear = new JPopupMenu();
         popup_symmetry = new JPopupMenu();
 
         //------------------------------------ Setup File Popup ---------------------------------------
@@ -53,15 +52,10 @@ public class PopUpMenu {
         btn_fexport.setBackground(Color.LIGHT_GRAY);
         btn_fclose.setBackground(Color.LIGHT_GRAY);
 
-        //Label
-        JLabel label_file = new JLabel("File Option:");
-        label_file.setFont(new Font("Serif",Font.BOLD,25));
-
         //Set Layout
         popup_file.setLayout(new GridLayout(5,1));
 
         //Add to popup
-        //popup_file.add(label_file);
         popup_file.add(btn_fnew);
         popup_file.add(btn_fsave);
         popup_file.add(btn_fload);
@@ -71,10 +65,10 @@ public class PopUpMenu {
         //------------------------------------ Setup Brush Popup ---------------------------------------
 
         //Setup Icons
-        ImageIcon icon_brush1 = new ImageIcon(this.getClass().getResource("/Assets/save.png"));
-        ImageIcon icon_brush2 = new ImageIcon(this.getClass().getResource("/Assets/load.png"));
-        ImageIcon icon_brush3 = new ImageIcon(this.getClass().getResource("/Assets/export.png"));
-        ImageIcon icon_brush4 = new ImageIcon(this.getClass().getResource("/Assets/close.png"));
+        ImageIcon icon_brush1 = new ImageIcon(this.getClass().getResource("/Assets/brush1.png"));
+            ImageIcon icon_brush2 = new ImageIcon(this.getClass().getResource("/Assets/brush2.png"));
+        ImageIcon icon_brush3 = new ImageIcon(this.getClass().getResource("/Assets/brush3.png"));
+        ImageIcon icon_brush4 = new ImageIcon(this.getClass().getResource("/Assets/brush4.png"));
 
         //Setup buttons
         JButton btn_brush1, btn_brush2, btn_brush3, btn_brush4;
@@ -129,37 +123,48 @@ public class PopUpMenu {
         //------------------------------------ Setup Symmetry Popup ------------------------------------
 
         //Set Icons
-        ImageIcon icon_hr = new ImageIcon(this.getClass().getResource("/Assets/close.png"));
-        ImageIcon icon_vr = new ImageIcon(this.getClass().getResource("/Assets/close.png"));
-        ImageIcon icon_cr = new ImageIcon(this.getClass().getResource("/Assets/close.png"));
+        ImageIcon icon_hr = new ImageIcon(this.getClass().getResource("/Assets/hr.png"));
+        ImageIcon icon_vr = new ImageIcon(this.getClass().getResource("/Assets/vr.png"));
+        ImageIcon icon_4 = new ImageIcon(this.getClass().getResource("/Assets/sym_4.png"));
+        ImageIcon icon_6 = new ImageIcon(this.getClass().getResource("/Assets/sym_6.png"));
+        ImageIcon icon_8 = new ImageIcon(this.getClass().getResource("/Assets/sym_8.png"));
+        ImageIcon icon_10 = new ImageIcon(this.getClass().getResource("/Assets/sym_10.png"));
 
         //Set Buttons
         JButton btn_hr = new JButton("Horizontal", icon_hr);
         JButton btn_vr = new JButton("Vertical", icon_vr);
-        JButton btn_cr = new JButton("Cross", icon_cr);
+        JButton btn_4 = new JButton("4 Symmetries", icon_4);
+        JButton btn_6 = new JButton("6 Symmetries",icon_6);
+        JButton btn_8 = new JButton("8 Symmetries", icon_8);
+        JButton btn_10 = new JButton("10 Symmetries", icon_10);
         JButton btn_close = new JButton("Close",icon_close);
 
         //Button Properties
-        btn_hr.setVerticalTextPosition(JButton.BOTTOM);
-        btn_hr.setHorizontalTextPosition(JButton.CENTER);
-        btn_vr.setVerticalTextPosition(JButton.BOTTOM);
-        btn_vr.setHorizontalTextPosition(JButton.CENTER);
-        btn_cr.setVerticalTextPosition(JButton.BOTTOM);
-        btn_cr.setHorizontalTextPosition(JButton.CENTER);
-        btn_close.setVerticalTextPosition(JButton.BOTTOM);
-        btn_close.setHorizontalTextPosition(JButton.CENTER);
+        btn_hr.setHorizontalAlignment(SwingConstants.LEFT);
+        btn_vr.setHorizontalAlignment(SwingConstants.LEFT);
+        btn_4.setHorizontalAlignment(SwingConstants.LEFT);
+        btn_6.setHorizontalAlignment(SwingConstants.LEFT);
+        btn_8.setHorizontalAlignment(SwingConstants.LEFT);
+        btn_10.setHorizontalAlignment(SwingConstants.LEFT);
+        btn_close.setHorizontalAlignment(SwingConstants.LEFT);
 
         //Button Color
         btn_hr.setBackground(Color.LIGHT_GRAY);
         btn_vr.setBackground(Color.LIGHT_GRAY);
-        btn_cr.setBackground(Color.LIGHT_GRAY);
+        btn_4.setBackground(Color.LIGHT_GRAY);
+        btn_6.setBackground(Color.LIGHT_GRAY);
+        btn_8.setBackground(Color.LIGHT_GRAY);
+        btn_10.setBackground(Color.LIGHT_GRAY);
         btn_close.setBackground(Color.LIGHT_GRAY);
 
         //Add to popup menu
-        popup_symmetry.setLayout(new GridLayout(4,1));
+        popup_symmetry.setLayout(new GridLayout(7,1));
         popup_symmetry.add(btn_hr);
         popup_symmetry.add(btn_vr);
-        popup_symmetry.add(btn_cr);
+        popup_symmetry.add(btn_4);
+        popup_symmetry.add(btn_6);
+        popup_symmetry.add(btn_8);
+        popup_symmetry.add(btn_10);
         popup_symmetry.add(btn_close);
 
         //------------------------------------ Setup Popup properties ----------------------------------
@@ -174,7 +179,6 @@ public class PopUpMenu {
         int width = 300;
         int height = 300;
         popup_size.setPopupSize(width, height);
-        popup_clear.setPopupSize(width, height);
         popup_brush.setPopupSize(width, height);
         popup_file.setPopupSize(width, height);
         popup_symmetry.setPopupSize(width,height);
@@ -184,7 +188,6 @@ public class PopUpMenu {
         int y = config.getPosition().y + 300;
         //Set location for popups
         popup_size.setLocation(x, y);
-        popup_clear.setLocation(x, y);
         popup_brush.setLocation(x, y);
         popup_file.setLocation(x,y);
         popup_symmetry.setLocation(x,y);
@@ -202,7 +205,10 @@ public class PopUpMenu {
         btn_fclose.addActionListener(new PopupButtonListener(this));
         btn_hr.addActionListener(new PopupButtonListener(this));
         btn_vr.addActionListener(new PopupButtonListener(this));
-        btn_cr.addActionListener(new PopupButtonListener(this));
+        btn_4.addActionListener(new PopupButtonListener(this));
+        btn_6.addActionListener(new PopupButtonListener(this));
+        btn_8.addActionListener(new PopupButtonListener(this));
+        btn_10.addActionListener(new PopupButtonListener(this));
         btn_close.addActionListener(new PopupButtonListener(this));
 
         //Add action listeners for sliders and colors

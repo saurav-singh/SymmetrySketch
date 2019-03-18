@@ -13,6 +13,7 @@ public class Symmetry {
     private Color c;
     private int s;
     private int b;
+    private int n;
 
     public Symmetry() {
 
@@ -27,6 +28,7 @@ public class Symmetry {
         c = this.config.getColor();
         s = this.config.getSize();
         b = this.config.getBrushType();
+        n = this.config.getSymCross();
     }
 
     public void addHrSymmetry(Point point) {
@@ -60,8 +62,38 @@ public class Symmetry {
         //Add symmetric points to config
         this.config.addStrokePoint(p, c, s, b);
 
-        if (this.config.getSymHorizontal()){
-            this.addHrSymmetry(p)   ;
+        if (this.config.getSymHorizontal()) {
+            this.addHrSymmetry(p);
+        }
+    }
+
+    public void addCrSymmetry(Point point) {
+
+        this.loadData();
+
+        //Required Variables
+        int N_symmetries = n;
+        int degreeIncrement = 360/N_symmetries;
+        double radius, deg;
+        int newX, newY;
+        //Center of canvas:
+        int cx = w / 2;
+        int cy = h / 2;
+
+        //Calculate radius - distance formula
+        radius = Math.sqrt(Math.pow((point.x - cx), 2) + Math.pow((point.y - cy), 2));
+
+        //Calculate relative degree
+        deg = Math.toDegrees(Math.atan2((point.y - cy), (point.x - cx)));
+
+        for (int i=0;i<N_symmetries;i++) {
+
+            deg += degreeIncrement;
+            newX = (int) (cx + radius * Math.cos(Math.toRadians(deg)));
+            newY = (int) (cy + radius * Math.sin(Math.toRadians(deg)));
+
+            this.config.addStrokePoint(new Point(newX,newY),c,s,b);
+
         }
     }
 }

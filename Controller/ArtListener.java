@@ -34,6 +34,11 @@ public class ArtListener implements MouseMotionListener {
             this.symmetry.addVrSymmetry(e.getPoint());
         }
 
+        if(this.config.getSymCross() > 0) {
+            this.symmetry.addCrSymmetry(e.getPoint());
+        }
+
+        this.painter.load_data();
         this.painter.re_paint();
     }
 

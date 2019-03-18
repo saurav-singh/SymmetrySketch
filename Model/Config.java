@@ -16,7 +16,7 @@ public class Config {
     private static Point cursor;
     private static boolean sym_horizontal;
     private static boolean sym_vertical;
-    private static boolean sym_cross;
+    private static int sym_N;
     private static ArrayList<Point> sketchPoints;
     private static ArrayList<Color> colorPoints;
     private static ArrayList<Integer> sizePoints;
@@ -37,7 +37,7 @@ public class Config {
         this.brushPattern = new ArrayList<>();
         this.sym_horizontal = false;
         this.sym_vertical = false;
-        this.sym_cross = false;
+        this.sym_N = 0;
 
     }
 
@@ -83,15 +83,17 @@ public class Config {
 
     public boolean getSymHorizontal() { return this.sym_horizontal; }
 
-    public boolean getSymCross() { return this.sym_cross; }
+    public int getSymCross() { return this.sym_N; }
 
     //---------------------------- Setters ------------------------------------------
 
     public void addStrokePoint(Point p, Color c, int s, int b) {
+
         this.sketchPoints.add(p);
         this.colorPoints.add(c);
         this.sizePoints.add(s);
         this.brushPattern.add(b);
+
     }
 
     public void setSize(int s) { this.size = s; }
@@ -107,6 +109,7 @@ public class Config {
         this.getSketchPoints().clear();
         this.getColorPoints().clear();
         this.getSizePoints().clear();
+        this.getBrushPattern().clear();
 
     }
 
@@ -116,7 +119,7 @@ public class Config {
 
     public void setSymHorizontal(boolean b) { this.sym_horizontal = b; }
 
-    public void setSymCross (boolean b) { this.sym_cross = b; }
+    public void setSymCross (int b) { this.sym_N = b; }
 
 
     //---------------------------- Helper Methods ---------------------------------
@@ -130,7 +133,7 @@ public class Config {
         this.bgColor =  C.getBgColor();
         this.sym_horizontal = C.getSymHorizontal();
         this.sym_vertical = C.getSymVertical();
-        this.sym_cross = C.getSymCross();
+        this.sym_N = C.getSymCross();
         this.sketchPoints = new ArrayList<>(C.getSketchPoints());
         this.colorPoints = new ArrayList<>(C.getColorPoints());
         this.sizePoints = new ArrayList<>(C.getSizePoints());

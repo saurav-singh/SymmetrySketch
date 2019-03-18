@@ -82,7 +82,7 @@ public class PopupButtonListener implements ActionListener {
                 this.config.setBgColor(Color.WHITE);
                 this.config.setSymVertical(false);
                 this.config.setSymHorizontal(false);
-                this.config.setSymCross(false);
+                this.config.setSymCross(0);
                 this.config.clearSketch();
                 this.painter.load_data();
                 this.painter.re_paint();
@@ -123,14 +123,15 @@ public class PopupButtonListener implements ActionListener {
 
             this.closePopups();
 
-            boolean hr,vr,cr;
+            boolean hr,vr;
+            int cr;
             hr = this.config.getSymHorizontal();
             vr = this.config.getSymVertical();
             cr = this.config.getSymCross();
 
             this.config.setSymVertical(false);
             this.config.setSymHorizontal(false);
-            this.config.setSymCross(false);
+            this.config.setSymCross(0);
             this.painter.load_data();
 
             JFileChooser fileChooser = new JFileChooser();
@@ -164,10 +165,30 @@ public class PopupButtonListener implements ActionListener {
 
         }
 
-        if (e.getActionCommand().equals("Cross")) {
+        if (e.getActionCommand().equals("4 Symmetries")) {
 
-            boolean r = this.config.getSymCross();
-            this.config.setSymCross(!r);
+            this.config.setSymCross(4);
+            this.painter.load_data();
+            this.painter.re_paint();
+        }
+
+        if (e.getActionCommand().equals("6 Symmetries")) {
+
+            this.config.setSymCross(6);
+            this.painter.load_data();
+            this.painter.re_paint();
+        }
+
+        if (e.getActionCommand().equals("8 Symmetries")) {
+
+            this.config.setSymCross(8);
+            this.painter.load_data();
+            this.painter.re_paint();
+        }
+
+        if (e.getActionCommand().equals("10 Symmetries")) {
+
+            this.config.setSymCross(10);
             this.painter.load_data();
             this.painter.re_paint();
         }

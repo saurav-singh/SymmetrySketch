@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class TopMenu extends JPanel {
 
-    //
+    //Initialize buttons
     private JButton file;
     private JButton brush;
     private JButton eraser;
@@ -27,7 +27,6 @@ public class TopMenu extends JPanel {
         clear = new MenuButton("Clear", "clear.png");
         background = new MenuButton("Bkground", "background.png");
         symmetry = new MenuButton("Symmetry", "symmetry.png");
-
 
         //Set Top menu Layout
         this.setLayout(new GridLayout(1, 8));

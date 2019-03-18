@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class ArtCanvas extends JPanel {
 
     //Symmetries
-    private boolean hr, vr, cr;
+    private boolean hr, vr;
+    private int cr;
     //Sketch points
     private ArrayList<Point> sketchPoint;
     //Size history
@@ -19,6 +20,7 @@ public class ArtCanvas extends JPanel {
     private ArrayList<Color> colorPoint;
     //Brush Type
     private ArrayList<Integer> brushType;
+
 
     //Art Class Constructor
     public ArtCanvas(Config config) {
@@ -67,37 +69,39 @@ public class ArtCanvas extends JPanel {
         //Set Anti-alias
         G2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         G2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        //G2.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
         //Sketch on canvas if there are any points on 'sketchPoint'
-        if (this.sketchPoint.size() > 0) {
+        for (int i = 0; i < this.sketchPoint.size(); i++) {
 
-            for (int i = 0; i < this.sketchPoint.size(); i++) {
+            //Get position
+            int x = this.sketchPoint.get(i).x;
+            int y = this.sketchPoint.get(i).y;
 
-                //Get position
-                int x = this.sketchPoint.get(i).x;
-                int y = this.sketchPoint.get(i).y;
+            //Set color
+            G2.setColor(this.colorPoint.get(i));
 
-                //Set color
-                G2.setColor(this.colorPoint.get(i));
+            //Size
+            int s = this.sizePoint.get(i);
 
-                //Stroke according to brush type
-                switch (this.brushType.get(i)) {
-                    case 1:
-                        G2.fillOval(x, y, this.sizePoint.get(i), this.sizePoint.get(i));
-                        break;
-                    case 2:
-                        G2.drawRect(x, y, this.sizePoint.get(i), this.sizePoint.get(i));
-                        break;
-                    case 3:
-                        //G2.fillArc(x, y, this.sizePoint.get(i), this.sizePoint.get(i),0,180);
-                        G2.drawArc(x, y, this.sizePoint.get(i), this.sizePoint.get(i), 0, 50);
-                        break;
-                    case 4:
-                        G2.fillOval(x, y, this.sizePoint.get(i), this.sizePoint.get(i));
-                        break;
-                }
-
+            //Stroke according to brush type
+            switch (this.brushType.get(i)) {
+                case 1:
+                    G2.fillOval(x - s / 2, y - s / 2, s, s);
+                    break;
+                case 2:
+                    G2.drawRect(x - s / 2, y - s / 2, s, s);
+                    break;
+                case 3:
+                    G2.drawArc(x, y - s / 3, s, s, 180, -90);
+                    G2.drawArc(x - s, y - s / 3, s, s, 0, 90);
+                    break;
+                case 4:
+                    G2.drawArc(x - s, y - s / 2, s, s, 0, 90);
+                    G2.drawArc(x, y - s / 2, s, s, 180, 90);
+                    break;
             }
+
         }
 
         //Symmetric Guide Lines if active
@@ -112,13 +116,14 @@ public class ArtCanvas extends JPanel {
             int y2 = this.getHeight();
 
             G2.drawLine(x1, y1, x2, y2);
+
         }
 
         //Horizontal Symmetry guide line
         if (this.hr) {
 
             int x1 = 0;
-            int y1 = this.getHeight()/2;
+            int y1 = this.getHeight() / 2;
             int x2 = this.getWidth();
             int y2 = y1;
 
@@ -126,15 +131,34 @@ public class ArtCanvas extends JPanel {
         }
 
         //Cross Symmetry guide line
-        if (this.cr) {
+        if (this.cr > 0) {
 
-            int x1 = 0;
-            int y1 = 0;
-            int x2 = this.getWidth();
-            int y2 = this.getHeight();
+            //Required Variables
+            int N_symmetries = this.cr;
+            int degreeIncrement = 360 / N_symmetries;
+            double radius, deg;
+            int newX, newY;
+            //Center of canvas:
+            int cx = this.getHeight() / 2;
+            int cy = this.getWidth() / 2;
+            Point point = new Point(this.getWidth(), cy);
 
-            G2.drawLine(x1, y1, x2, y2);
-            G2.drawLine(x1,y2,x2,y1);
+            //Calculate radius - distance formula
+            radius = Math.sqrt(Math.pow((point.x - cx), 2) + Math.pow((point.y - cy), 2));
+
+            //Calculate relative degree
+            deg = Math.toDegrees(Math.atan2((point.y - cy), (point.x - cx)));
+
+            for (int i = 0; i < N_symmetries ; i++) {
+
+                deg += degreeIncrement;
+                newX = (int) (cx + radius * Math.cos(Math.toRadians(deg)));
+                newY = (int) (cy + radius * Math.sin(Math.toRadians(deg)));
+                G2.drawLine(cy, cx, newY, newX);
+                point.x = newX;
+                point.y = newY;
+
+            }
         }
 
     }
