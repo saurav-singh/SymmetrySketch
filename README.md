@@ -2,7 +2,7 @@
 Draw symmetric art and have fun !
 
 ## Project for GUI
-*To run:
+* To run:
   * Download / Clone jar file
   * Install java
   * In terminal / cmd : java -jar "Symmetry Sketch.jar"
