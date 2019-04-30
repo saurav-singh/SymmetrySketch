@@ -3,7 +3,7 @@ Draw symmetric art and have fun !
 
 ## Project for GUI
 * To run:
-  * Download / Clone [exe file](https://github.com/saurav-singh/SymmetrySketch/blob/master/Symmetry%20Sketch.exe) and run
+  * Download / Clone [exe file](https://github.com/saurav-singh/SymmetrySketch/blob/master/SymmetrySketch.exe) and run
   * OR
   * Download / Clone [jar file](https://github.com/saurav-singh/SymmetrySketch/blob/master/Symmetry%20Sketch.jar)
   * Install java
