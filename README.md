@@ -1,5 +1,9 @@
 # SymmetryArt
-App that allows you to draw symmetric art
+Draw symmetric art and have fun !
 
-CS 338 - Graphical User Interface
-work in progress..
+## Project for GUI
+
+[alt text](./screenshots/screenshot_1.png)
+[alt text](./screenshots/screenshot_1.png)
+
+
