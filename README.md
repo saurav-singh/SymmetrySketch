@@ -6,6 +6,9 @@ Draw symmetric art and have fun !
   * Download / Clone [jar file](https://github.com/saurav-singh/SymmetrySketch/blob/master/Symmetry%20Sketch.jar)
   * Install java
   * In terminal / cmd : java -jar "Symmetry Sketch.jar"
+  
+### Need to improve
+Rending points on canvas.
 
 
 ### Screenshots
